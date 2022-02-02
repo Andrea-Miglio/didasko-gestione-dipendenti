@@ -1,0 +1,36 @@
+<h1>Ruolo Aziendale</h1>
+
+<form #formRuoloAziendale="ngForm" (ngSubmit)="onSubmit(formRuoloAziendale)">
+  <input
+    type="text"
+    ngModel
+    name="ruoloAziendale"
+    #ruoloAziendale="ngModel"
+    required
+  /><br/>
+  <p
+    style="color:red"
+    [hidden]="ruoloAziendale.valid || ruoloAziendale.pristine"
+  >
+    Ruolo Aziendale obbligatorio
+  </p>
+  <br/>
+  <div *ngIf="!modifica">
+    <button type="submit" [disabled]="!formRuoloAziendale.valid">
+      Inserisci
+    </button>
+  </div>
+  <div *ngIf="modifica">
+    <button type="submit" [disabled]="!formRuoloAziendale.valid" (click)="confermaModifica(formRuoloAziendale)">
+      Inserisci
+    </button>
+  </div>
+  
+  <button type="reset">Reset</button>
+</form>
+
+<p *ngFor="let ruolo of listaRuoliAziendali">
+  {{ruolo | json}}
+  <button (click)="modificaRuoloAziendale(ruolo.id,formRuoloAziendale)">Modifica</button>
+  <button (click)="cancellaRuoloAziendale(ruolo.id)">Cancella</button>
+</p>
